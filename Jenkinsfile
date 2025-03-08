@@ -8,25 +8,28 @@ pipeline {
      registryCredential = "jenkins"
   }
   stages {
-    stage('Build'){
+    stage('Build') {
       steps {
-       sh 'mvn clean'
-       sh 'mvn install'
-       sh 'mvn package'
+       sh 'mvn clean install package'
      }
    }
-    stage('test'){
+    stage('Test') {
       steps {
-       echo "test step"
+       echo "Running tests"
        sh 'mvn test'
      }
    }
-    stage('deploy'){
+    stage('Deploy') {
       steps {
-      script {
-       docker.build registry + ":$BUILD_NUMBER"
+        script {
+          // Authenticate with Docker Hub using Jenkins credentials
+          withDockerRegistry([credentialsId: registryCredential, url: ""]) {
+            def image = docker.build("${registry}:$BUILD_NUMBER")
+            image.push() // Push the built image to Docker Hub
+            image.push("latest") // Update the "latest" tag
+          }
+        }
       }
-     }
-   }
+    }
   }
 }
