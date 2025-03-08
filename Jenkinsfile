@@ -5,7 +5,7 @@ pipeline {
   }
   environment {
      registry = "myratam/jenkins"
-     registryCredential = 'jenkins'
+     registryCredential = "jenkins"
   }
   stages {
     stage('Build'){
