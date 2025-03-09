@@ -19,35 +19,25 @@
     <finalName>${project.artifactId}</finalName>
 
     <plugins>
+      <!-- Jetty Plugin -->
       <plugin>
         <groupId>org.mortbay.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
       </plugin>
-    </plugins>
 
-      <finalName>${project.artifactId}</finalName>
-      <plugins>
-        <!-- Jetty Plugin -->
-        <plugin>
-            <groupId>org.mortbay.jetty</groupId>
-            <artifactId>jetty-maven-plugin</artifactId>
-        </plugin>
-
-        <!-- Maven WAR Plugin (Missing Plugin) -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-war-plugin</artifactId>
-            <version>3.4.0</version> <!-- Use latest stable version -->
-            <configuration>
-                <failOnMissingWebXml>false</failOnMissingWebXml> 
-            </configuration>
-        </plugin>
+      <!-- Maven WAR Plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.4.0</version> <!-- Latest stable version -->
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml> 
+        </configuration>
+      </plugin>
     </plugins>
-</build>
- 
+  </build>
 
   <dependencies>
-
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
